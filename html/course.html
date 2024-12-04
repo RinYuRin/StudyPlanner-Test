@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Study Planner</title>
+      <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+      <script src="https://cdn.tailwindcss.com"></script>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+   </head>
+   <body class="bg-teal-100">
+      <!-- header -->
+      <header class="bg-teal-100 p-4 fixed w-full z-10 top-0 left-0 shadow-md">
+         <div class="flex justify-between items-center">
+            <div class="flex items-center">
+               <i id="menu-icon" class="fas fa-bars p-2 rounded cursor-pointer"></i>
+               <img src="https://via.placeholder.com/30x30" alt="Logo" class="rounded-full ml-2">
+               <h1 class="text-teal-800 text-2xl font-bold pl-2">Study Planner</h1>
+            </div>
+            <h1 class="text-teal-800 text-3xl font-bold absolute ml-72">Course</h1>
+            <div class="flex items-center space-x-4">
+               <div class="relative">
+                  <input type="text" placeholder="Search" class="bg-teal-500 border-2 border-teal-600 text-white placeholder-white rounded-full pl-8 pr-4 py-2">
+                  <i class="fas fa-search absolute left-2 top-1/2 transform -translate-y-1/2 text-white"></i>
+               </div>
+               <i class="fas fa-bell text-teal-800 cursor-pointer"></i>
+               <div class="flex items-center space-x-2 border-2 border-teal-600 rounded-full px-2 py-1">
+                  <img src="https://via.placeholder.com/30x30" alt="User" class="rounded-full">
+                  <span class="text-teal-800 font-medium">Delcano</span>
+                  <i class="fas fa-chevron-down text-teal-800"></i>
+               </div>
+            </div>
+         </div>
+      </header>
+      <!-- sbar -->
+      <div class="flex mt-20">
+         <aside id="sidebar" class="bg-teal-100 w-20 transition-all duration-300 p-4 overflow-hidden">
+            <ul id="sidebar-menu" class="space-y-3">
+              <li>
+                <a href="dashboard.html" class="block px-4 py-2 hover:bg-teal-400 rounded text-black flex items-center">
+                  <i class="fas fa-tachometer-alt"></i> 
+                  <span class="ml-2 hidden">Dashboard</span>
+                </a>
+              </li>
+              <li>
+                <a href="task.html" class="block px-4 py-2 hover:bg-teal-400 rounded text-black flex items-center">
+                  <i class="fas fa-tasks"></i>
+                  <span class="ml-2 hidden">Task</span>
+                </a>
+              </li>
+              <li>
+                <a href="course.html" class="block px-4 py-2 bg-teal-400 rounded text-black flex items-center">
+                  <i class="fas fa-book"></i>
+                  <span class="ml-2 hidden">Course</span>
+                </a>
+              </li>
+              <li>
+                <a href="todo.html" class="block px-4 py-2 hover:bg-teal-400 rounded text-black flex items-center">
+                  <i class="fas fa-list-ul"></i>
+                  <span class="ml-2 hidden">To-Do List</span>
+                </a>
+              </li>
+              <li>
+                <a href="starred.html" class="block px-4 py-2 hover:bg-teal-400 rounded text-black flex items-center">
+                  <i class="fas fa-star"></i>
+                  <span class="ml-2 hidden">Starred</span>
+                </a>
+              </li>
+            </ul>
+          </aside>
+         <!-- Main Content -->
+         <main class="flex-grow p-6">
+            <div class="flex justify-between mb-4">
+               <div id="course-buttons" class="flex space-x-4">
+                 <!-- this is where the created button to appear -->
+               </div>
+               <div class="flex items-center space-x-5">
+                  <button id="course-add" class="bg-teal-500 text-white px-4 py-2 rounded-md"><i class="fas fa-plus"></i></button>
+                  <i class="fas fa-edit"></i>
+                  <i class="fas fa-trash"></i>
+                  <button class="hover:bg-teal-300 px-2 py-1 rounded">Add Notes <i class="fas fa-plus"></i></button>
+                  <i class="fas fa-redo"></i>
+                  <i class="fas fa-check-square"></i>
+                  
+               </div>
+            </div>
+            <div id="lessons-list" class="rounded-lg">
+               <!-- lesson content -->
+            </div>
+         </main>
+      </div>
+
+      <!-- Modal for Adding a Course -->
+<!-- Updated Modal for Adding a Course -->
+<div id="course-modal" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center hidden">
+   <div class="bg-teal-100 rounded-lg p-6 w-96 shadow-md relative">
+      <button id="modal-close" class="absolute top-2 right-2 text-gray-700">
+         <i class="fas fa-times"></i>
+      </button>
+      <h2 class="text-xl font-bold text-teal-800 mb-4">Add New Course</h2>
+      <form id="course-form">
+         <!-- Course Title -->
+         <div class="mb-4">
+            <label class="block text-sm font-medium text-teal-800">Course Title</label>
+            <input type="text" id="course-title" class="w-full border-2 border-teal-600 rounded p-2" required>
+         </div>
+         <!-- Upload Picture -->
+         <div class="mb-4">
+            <label class="block text-sm font-medium text-teal-800">Upload Picture</label>
+            <input type="file" id="course-picture" class="w-full text-sm" accept="image/*">
+         </div>
+         <!-- Buttons -->
+         <div class="flex justify-end">
+            <button type="button" id="cancel-button" class="bg-gray-400 text-white px-4 py-2 rounded mr-2">Cancel</button>
+            <button type="submit" class="bg-teal-500 text-white px-4 py-2 rounded">Add</button>
+         </div>
+      </form>
+   </div>
+</div>
+
+<!-- Modal for Adding Notes -->
+<div id="notes-modal" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center hidden">
+   <div class="bg-teal-100 rounded-lg p-6 w-96 shadow-md relative">
+      <button id="notes-modal-close" class="absolute top-2 right-2 text-gray-700">
+         <i class="fas fa-times"></i>
+      </button>
+      <h2 class="text-xl font-bold text-teal-800 mb-4">Add Notes</h2>
+      <form id="notes-form">
+         <!-- Note Title -->
+         <div class="mb-4">
+            <label class="block text-sm font-medium text-teal-800">Note Title</label>
+            <input type="text" id="note-title" class="w-full border-2 border-teal-600 rounded p-2" placeholder="Add Title" required>
+         </div>
+         <div class="mb-4">
+            <label class="block text-sm font-medium text-teal-800">Course Title</label>
+            <select id="course-dropdown" class="w-full border-2 border-teal-600 rounded p-2" required>
+                <option value="" disabled selected>Select a course</option>
+            </select>
+         </div>
+         <!-- Note Description -->
+         <div class="mb-4">
+            <label class="block text-sm font-medium text-teal-800">Description</label>
+            <textarea id="note-description" class="w-full border-2 border-teal-600 rounded p-2 h-24" placeholder="Add contents" required></textarea>
+         </div>
+         <!-- Buttons -->
+         <div class="flex justify-end">
+            <button type="button" id="notes-cancel-button" class="bg-gray-400 text-white px-4 py-2 rounded mr-2">Cancel</button>
+            <button type="submit" class="bg-teal-500 text-white px-4 py-2 rounded">Save</button>
+         </div>
+      </form>
+   </div>
+</div>
+
+
+
+
+      <script src="../js/sidebar.js"></script>
+      <script src="../js/courseCreate.js"></script>
+      <script src="../js/addNotes.js"></script>
+      
+   </body>
+</html>

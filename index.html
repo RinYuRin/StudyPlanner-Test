@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"> <!-- Font Awesome -->
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body, html {
+      height: 100%;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #f5f5f5;
+      font-size: 16px; /* Base font size */
+    }
+
+    .container {
+      width: 100%;
+      height: 90%; /* Added some space around the container */
+      display: flex;
+      flex-wrap: wrap; /* Ensure sections are responsive on smaller screens */
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .sign-in, .sign-up {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 30px;
+      box-sizing: border-box;
+    }
+
+    .sign-in {
+      background-color: #c2d4d8;
+    }
+
+    .sign-up {
+      background-color: #175f66;
+      color: white;
+    }
+
+    h1, h2 {
+      font-size: 3em; /* Adjusted font size for better responsiveness */
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .form {
+      width: 100%;
+      max-width: 400px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .input-container {
+      position: relative;
+      width: 100%;
+      margin: 10px 0;
+    }
+
+    .input-container input {
+      font-size: 1.5em;
+      padding: 10px 10px 10px 40px; /* Add space for the icon */
+      margin: 10px 0;
+      border: none;
+      border-bottom: 1px solid #2b2b2b;
+      background-color: transparent;
+      outline: none;
+      width: 100%;
+    }
+
+    .input-container i {
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1.5em;
+      color: #2b2b2b;
+    }
+
+    .forgot-password {
+      align-self: flex-end;
+      margin-top: 10px;
+      color: #2b2b2b;
+      font-size: 0.9em;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .sign-in-btn, .sign-up-btn {
+      font-size: 1.5em;
+      padding: 12px;
+      margin-top: 20px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      height: 60px;
+    }
+
+    .sign-in-btn {
+      background-color: #175f66;
+      color: white;
+    }
+
+    .sign-in-btn:hover {
+      background-color: #144b52;
+    }
+
+    .sign-up-btn {
+      background-color: transparent;
+      color: white;
+      border: 1px solid white;
+    }
+
+    .sign-up-btn:hover {
+      background-color: white;
+      color: #175f66;
+    }
+
+    .sign-up h2 {
+      font-size: 2.5em; /* Reduced size for mobile screens */
+      margin-bottom: 40px;
+    }
+
+    .sign-up p {
+      font-size: 1.2em;
+      margin-bottom: 30px;
+      text-align: center;
+      width: 80%;
+    }
+
+    /* Media Queries for responsiveness */
+    @media (max-width: 768px) {
+      h1, h2 {
+        font-size: 2.5em;
+      }
+
+      .input-container input {
+        font-size: 1.2em;
+      }
+
+      .sign-in-btn, .sign-up-btn {
+        font-size: 1.2em;
+      }
+
+      .container {
+        flex-direction: column; /* Stack the sections vertically on small screens */
+      }
+
+      .sign-in, .sign-up {
+        flex: none;
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Sign In Section -->
+    <div class="sign-in">
+      <h1>Sign in</h1>
+      <div class="form">
+        <form action="./php/signin.php" method="POST">
+        <!-- Email Input with Icon -->
+        <div class="input-container">
+          <i class="fas fa-envelope"></i>
+          <input type="email" name="email" id="email" placeholder="Email" required>
+        </div>
+        <!-- Password Input with Icon -->
+        <div class="input-container">
+          <i class="fas fa-lock"></i>
+          <input type="password" placeholder="Password" name="password" id="password" required>
+        </div>
+        <a href="#" class="forgot-password">Forgot your password?</a>
+        <button class="sign-in-btn">SIGN IN</button>
+      </form>
+      </div>
+    </div>
+
+    <!-- Sign Up Section -->
+    <div class="sign-up">
+      <h2>Hello, Friend!</h2>
+      <p>Enter your account details and start your journey with us</p>
+      <a href="./html/signup.html"><button class="sign-up-btn">SIGN UP</button></a>
+    </div>
+  </div>
+  
+</body>
+</html>

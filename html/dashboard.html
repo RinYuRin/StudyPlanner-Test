@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Study Planner</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/daisyui@2.34.0/dist/full.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body class="bg-teal-100">
+
+<!-- header -->
+<header class="bg-teal-100 p-4 fixed w-full z-10 top-0 left-0 shadow-md">
+  <div class="flex justify-between items-center">
+    <div class="flex items-center">
+      <i id="menu-icon" class="fas fa-bars p-2 rounded cursor-pointer"></i>
+      <img src="https://via.placeholder.com/30x30" alt="Logo" class="rounded-full ml-2">
+      <h1 class="text-gray-800 text-2xl font-bold pl-2">Study Planner</h1>
+    </div>
+    <h1 class="text-gray-800 text-3xl font-bold absolute ml-72">Dashboard</h1>
+    <div class="flex items-center space-x-4">
+      <div class="relative">
+        <input type="text" placeholder="Search" class="bg-teal-500 border-2 border-teal-600 text-white placeholder-white rounded-full pl-8 pr-4 py-2">
+        <i class="fas fa-search absolute left-2 top-1/2 transform -translate-y-1/2 text-white"></i>
+      </div>
+      <div class="relative">
+        <i id="notif-icon" class="fas fa-bell text-gray-800 cursor-pointer relative text-2xl">
+          <span id="notif-count" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full px-1 hidden">0</span>
+        </i>
+        <!-- Notification Container (No changes here) -->
+        <div id="notif-container" class="hidden absolute right-0 mt-2 bg-teal-200 w-64 shadow-lg rounded-lg p-4 z-10">
+          <h2 class="text-lg font-bold mb-2">Tasks Due Soon</h2>
+          <div id="notif-content" class="space-y-4">
+            <p class="text-sm text-gray-500">No tasks due soon.</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="flex items-center space-x-2 border-2 border-teal-600 rounded-full px-2 py-1">
+        <img src="https://via.placeholder.com/30x30" alt="User" class="rounded-full">
+        <span class="text-gray-800 font-medium">Delcano</span>
+        <i class="fas fa-chevron-down text-gray-800"></i>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- sbar -->
+<div class="flex mt-20">
+  <aside id="sidebar" class="bg-teal-100 w-20 transition-all duration-300 p-4 overflow-hidden">
+    <ul id="sidebar-menu" class="space-y-3">
+      <li>
+        <a href="dashboard.html" class="block px-4 py-2 bg-teal-400 rounded text-black flex items-center">
+          <i class="fas fa-tachometer-alt"></i> 
+          <span class="ml-2 hidden">Dashboard</span>
+        </a>
+      </li>
+      <li>
+        <a href="task.html" class="block px-4 py-2 hover:bg-teal-400 rounded text-black flex items-center">
+          <i class="fas fa-tasks"></i>
+          <span class="ml-2 hidden">Task</span>
+        </a>
+      </li>
+      <li>
+        <a href="course.html" class="block px-4 py-2 hover:bg-teal-400 rounded text-black flex items-center">
+          <i class="fas fa-book"></i>
+          <span class="ml-2 hidden">Course</span>
+        </a>
+      </li>
+      <li>
+        <a href="todo.html" class="block px-4 py-2 hover:bg-teal-400 rounded text-black flex items-center">
+          <i class="fas fa-list-ul"></i>
+          <span class="ml-2 hidden">To-Do List</span>
+        </a>
+      </li>
+      <li>
+        <a href="starred.html" class="block px-4 py-2 hover:bg-teal-400 rounded text-black flex items-center">
+          <i class="fas fa-star"></i>
+          <span class="ml-2 hidden">Starred</span>
+        </a>
+      </li>
+    </ul>
+  </aside>
+
+  <!-- Main cont -->
+  <main class="flex-grow p-6">
+    <div class="bg-teal-200 shadow-md rounded-lg p-6">
+      <!-- Tabs Sec -->
+      <div class="mb-4 ">
+        <div class="flex space-x-6 border-b-4 border-teal-500">
+          <button class="text-lg font-medium py-2 px-4 hover:text-teal-600 focus:outline-none active:text-teal-600" id="all-task-tab">All Tasks</button>
+          <button class="text-lg font-medium py-2 px-4 hover:text-teal-600 focus:outline-none active:text-teal-600" id="in-progress-tab">In Progress</button>
+          <button class="text-lg font-medium py-2 px-4 hover:text-teal-600 focus:outline-none active:text-teal-600" id="done-tab">Done</button>
+          <button class="text-lg font-medium py-2 px-4 hover:text-teal-600 focus:outline-none active:text-teal-600" id="due-tab">Due</button>
+        </div>
+      </div>
+
+      <!-- Tasks tab sect -->
+      <div id="tasks-content">
+        <div id="all-task" class="task-tab-content">
+          <table class="w-full">
+            <thead class="bg-teal-300">
+              <tr class="relative">
+                <th class="p-2 text-left">Task</th>
+                <th class="p-2 text-left">Status</th>
+                <th class="p-2 text-left">Due Date</th>
+                <th class="p-2 text-left w-20"></th>
+              </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- In progress tab content -->
+        <div id="in-progress" class="task-tab-content hidden">
+          <table class="w-full">
+            <thead class="bg-teal-300">
+              <tr>
+                <th class="p-2 text-left">Task</th>
+                <th class="p-2 text-left">Status</th>
+                <th class="p-2 text-left">Due Date</th>
+                <th class="p-2 text-left w-20"></th>
+              </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Done tab cont -->
+        <div id="done" class="task-tab-content hidden">
+          <table class="w-full">
+            <thead class="bg-teal-300">
+              <tr>
+                <th class="p-2 text-left">Task</th>
+                <th class="p-2 text-left">Status</th>
+                <th class="p-2 text-left">Due Date</th>
+                <th class="p-2 text-left w-20"></th>
+              </tr>
+            </thead>
+            <tbody>
+          </table>
+        </div>
+
+        <!-- Overdue tab cont,,, -->
+        <div id="due" class="task-tab-content hidden">
+          <table class="w-full">
+            <thead class="bg-teal-300">
+              <tr>
+                <th class="p-2 text-left">Task</th>
+                <th class="p-2 text-left">Status</th>
+                <th class="p-2 text-left">Due Date</th>
+                <th class="p-2 text-left w-20"></th>
+              </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+
+    <!-- the 3 cards -->
+    <div class="grid grid-row-3 gap-4 mt-8 mr-4">
+      <div class="bg-teal-400 p-6 rounded-lg text-white">
+        <h2 class="text-xl font-bold mb-2">Done Task</h2>
+        <span class="text-3xl font-extrabold">20</span>
+      </div>
+      <div class="bg-teal-500 p-6 rounded-lg text-white">
+        <h2 class="text-xl font-bold mb-2">On Going Task</h2>
+        <span class="text-3xl font-extrabold">15</span>
+      </div>
+      <div class="bg-teal-600 p-6 rounded-lg text-white">
+        <h2 class="text-xl font-bold mb-2">Over Due Task</h2>
+        <span class="text-3xl font-extrabold">2</span>
+      </div>
+    </div>
+
+  </div>
+
+<script src="../js/sidebar.js"></script>
+<script src="../js/notif.js"></script>
+<script src="../js/loadTasksec.js"></script>
+</body>
+</html>

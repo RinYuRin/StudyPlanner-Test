@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Study Planner</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/daisyui@2.34.0/dist/full.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body class="bg-teal-100 font-sans">
+
+<div class="flex h-screen">
+
+  <!-- header -->
+  <header class="bg-teal-100 p-4 fixed w-full z-10 top-0 left-0 shadow-md">
+    <div class="flex justify-between items-center">
+      <div class="flex items-center">
+        <i id="menu-icon" class="fas fa-bars p-2 rounded cursor-pointer"></i>
+        <img src="https://via.placeholder.com/30x30" alt="Logo" class="rounded-full ml-2">
+        <h1 class="text-teal-800 text-2xl font-bold pl-2">Study Planner</h1>
+      </div>
+      <h1 class="text-teal-800 text-3xl font-bold absolute ml-72">To Do List</h1>
+      <div class="flex items-center space-x-4">
+        <div class="relative">
+          <input type="text" placeholder="Search" class="bg-teal-500 border-2 border-teal-600 text-white placeholder-white rounded-full pl-8 pr-4 py-2">
+          <i class="fas fa-search absolute left-2 top-1/2 transform -translate-y-1/2 text-white"></i>
+        </div>
+        <i class="fas fa-bell text-teal-800 cursor-pointer"></i>
+        <div class="flex items-center space-x-2 border-2 border-teal-600 rounded-full px-2 py-1">
+          <img src="https://via.placeholder.com/30x30" alt="User" class="rounded-full">
+          <span class="text-teal-800 font-medium">Delcano</span>
+          <i class="fas fa-chevron-down text-teal-800"></i>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Sidebar -->
+  <div class="flex mt-20">
+    <aside id="sidebar" class="bg-teal-100 w-20 transition-all duration-300 p-4 overflow-hidden">
+      <ul id="sidebar-menu" class="space-y-3">
+        <li>
+          <a href="dashboard.html" class="block px-4 py-2 hover:bg-teal-400 rounded text-black flex items-center">
+            <i class="fas fa-tachometer-alt"></i> 
+            <span class="ml-2 hidden">Dashboard</span>
+          </a>
+        </li>
+        <li>
+          <a href="task.html" class="block px-4 py-2 hover:bg-teal-400 rounded text-black flex items-center">
+            <i class="fas fa-tasks"></i>
+            <span class="ml-2 hidden">Task</span>
+          </a>
+        </li>
+        <li>
+          <a href="course.html" class="block px-4 py-2 hover:bg-teal-400 rounded text-black flex items-center">
+            <i class="fas fa-book"></i>
+            <span class="ml-2 hidden">Course</span>
+          </a>
+        </li>
+        <li>
+          <a href="todo.html" class="block px-4 py-2 hover:bg-teal-400 rounded text-black flex items-center">
+            <i class="fas fa-list-ul"></i>
+            <span class="ml-2 hidden">To-Do List</span>
+          </a>
+        </li>
+        <li>
+          <a href="starred.html" class="block px-4 py-2 bg-teal-400 rounded text-black flex items-center">
+            <i class="fas fa-star"></i>
+            <span class="ml-2 hidden">Starred</span>
+          </a>
+        </li>
+      </ul>
+    </aside>
+  </div>
+
+  <!-- main cont -->
+  <main class="flex-grow p-6 mt-20">
+    <!-- Grid layout for main content in a single column -->
+    <div class="grid grid-cols-1 gap-6 h-full">
+      
+      <!-- Today's Tasks -->
+      <div class="bg-teal-500 text-white p-6 rounded-lg relative mb-4">
+        <div class="absolute top-0 left-0 right-0 bg-teal-600 py-2 px-4 rounded-t-lg">
+          <h2 class="text-lg font-bold">Today's Tasks</h2>
+        </div>
+        <ul class="list-disc list-inside mt-8">
+          <li>ADBMS - Activity 1</li>
+          <li>ADBMS - Assignment 2</li>
+          <li>ELECT 3 - Title Proposal</li>
+          <li>APPSDEV - Activity 4</li>
+        </ul>
+      </div>
+      
+      <!-- Upcoming Tasks -->
+      <div class="bg-teal-500 text-white p-6 rounded-lg relative mb-4">
+        <div class="absolute top-0 left-0 right-0 bg-teal-600 py-2 px-4 rounded-t-lg">
+          <h2 class="text-lg font-bold">Upcoming Tasks</h2>
+        </div>
+        <ul class="list-disc list-inside mt-8">
+          <li>ADBMS - Activity 2</li>
+          <li>ELECT - Assignment 2</li>
+          <li>APPSDEV - Assignment 1</li>
+          <li>ADBMS - Activity 3</li>
+        </ul>
+      </div>
+    </div>
+  </main>
+  
+
+</div>
+
+<script src="../js/sidebar.js"></script>
+</body>
+</html>

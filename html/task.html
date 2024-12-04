@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Study Planner</title>
+      <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+      <script src="https://cdn.tailwindcss.com"></script>
+      <script src="https://cdn.jsdelivr.net/npm/daisyui@2.34.0/dist/full.js"></script>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+      <script src="https://cdn.jsdelivr.net/npm/moment@2.29.1/moment.min.js"></script>
+   </head>
+   <body class="bg-teal-100 font-sans">
+      <!-- header -->
+      <header class="bg-teal-100 p-4 fixed w-full z-10 top-0 left-0 shadow-md">
+         <div class="flex justify-between items-center">
+            <div class="flex items-center">
+               <i id="menu-icon" class="fas fa-bars p-2 rounded cursor-pointer"></i>
+               <img src="https://via.placeholder.com/30x30" alt="Logo" class="rounded-full ml-2">
+               <h1 class="text-gray-800 text-2xl font-bold pl-2">Study Planner</h1>
+            </div>
+            <h1 class="text-gray-800 text-3xl font-bold absolute ml-72">Task</h1>
+            <div class="flex items-center space-x-4">
+               <div class="relative">
+                  <input type="text" placeholder="Search" class="bg-teal-500 border-2 border-teal-600 text-white placeholder-white rounded-full pl-8 pr-4 py-2">
+                  <i class="fas fa-search absolute left-2 top-1/2 transform -translate-y-1/2 text-white"></i>
+               </div>
+               <div class="relative">
+                  <i id="notif-icon" class="fas fa-bell text-gray-800 cursor-pointer relative text-2xl">
+                    <span id="notif-count" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full px-1 hidden">0</span>
+                  </i>
+                  <div id="notif-container" class="hidden absolute right-0 mt-2 bg-white w-64 shadow-lg rounded-lg p-4 z-10">
+                    <h2 class="text-lg font-bold mb-2">Tasks Due Soon</h2>
+                    <div id="notif-content" class="space-y-4">
+                      <p class="text-sm text-gray-500">No tasks due soon.</p>
+                    </div>
+                  </div>
+                </div>
+               <div class="flex items-center space-x-2 border-2 border-teal-600 rounded-full px-2 py-1">
+                  <img src="https://via.placeholder.com/30x30" alt="User" class="rounded-full">
+                  <span class="text-gray-800 font-medium">Delcano</span>
+                  <i class="fas fa-chevron-down text-gray-800"></i>
+               </div>
+            </div>
+         </div>
+      </header>
+
+         <!-- sbar -->
+         <div class="flex mt-20">
+         <aside id="sidebar" class="bg-teal-100 w-20 transition-all duration-300 p-4 overflow-hidden">
+            <ul id="sidebar-menu" class="space-y-3">
+              <li>
+                <a href="dashboard.html" class="block px-4 py-2 hover:bg-teal-400 rounded text-black flex items-center">
+                  <i class="fas fa-tachometer-alt"></i> 
+                  <span class="ml-2 hidden">Dashboard</span>
+                </a>
+              </li>
+              <li>
+                <a href="task.html" class="block px-4 py-2 bg-teal-400 rounded text-black flex items-center">
+                  <i class="fas fa-tasks"></i>
+                  <span class="ml-2 hidden">Task</span>
+                </a>
+              </li>
+              <li>
+                <a href="course.html" class="block px-4 py-2 hover:bg-teal-400 rounded text-black flex items-center">
+                  <i class="fas fa-book"></i>
+                  <span class="ml-2 hidden">Course</span>
+                </a>
+              </li>
+              <li>
+                <a href="todo.html" class="block px-4 py-2 hover:bg-teal-400 rounded text-black flex items-center">
+                  <i class="fas fa-list-ul"></i>
+                  <span class="ml-2 hidden">To-Do List</span>
+                </a>
+              </li>
+              <li>
+                <a href="starred.html" class="block px-4 py-2 hover:bg-teal-400 rounded text-black flex items-center">
+                  <i class="fas fa-star"></i>
+                  <span class="ml-2 hidden">Starred</span>
+                </a>
+              </li>
+            </ul>
+          </aside>
+      <!-- the main content goes here -->
+      <main class="flex-grow p-4">
+         <div class="flex items-center justify-between">
+            <button id="prev" class="text-gray-800"><i class="fas fa-chevron-left"></i> Prev</button>
+            <h2 class="text-lg font-bold text-gray-800" id="current-month">// dynamic month here</h2>
+            <button id="next" class="text-gray-800">Next <i class="fas fa-chevron-right"></i></button>
+        </div>
+         <div class="flex items-center justify-center">
+            <div class="flex space-x-4 mt-4" id="calendar-dates">
+               <!-- Dynamic Date Boxes will be inserted here jsut ignore it-->
+            </div>
+         </div>
+         <div class="flex items-center justify-between mt-4">
+            <h3 class="text-xl font-bold mb-4 text-gray-700 mt-4" id="current-date-heading">// Current date here, in this format , MMM DD, YYYY -- dynamically updates</h3>
+            <div class="flex space-x-4">
+               <button id="openModal" class="text-gray-800 hover:text-teal-500 transition-all duration-300">
+               <i class="fas fa-plus-circle"></i>
+               </button>
+               <button id="syncTasks" class="text-gray-800 hover:text-teal-500 transition-all duration-300">
+               <i class="fas fa-sync-alt"></i>
+               </button>
+               <button class="text-gray-800 hover:text-teal-500 transition-all duration-300">
+               <i class="fas fa-check-square"></i>
+               </button>
+            </div>
+         </div>
+         <div class="bg-teal-200 shadow-md rounded-lg p-6">
+         <!-- Tasks tab section -->
+         <div id="tasks-content">
+            <div id="all-task" class="task-tab-content">
+               <table class="w-full">
+                  <thead class="bg-teal-300">
+                     <tr>
+                        <th class="p-2 text-left">Task</th>
+                        <th class="p-2 text-left">Status</th>
+                        <th class="p-2 text-left">Due Date</th>
+                        <th class="p-2 text-left"></th>
+                     </tr>
+                  </thead>
+                  <tbody id="task-table-body">
+                 </tbody>
+                 
+               </table>
+            </div>
+
+            <!--taask creation modal-->
+            <form id="taskForm">
+            <div id="taskModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden mt-20">
+               <div class="bg-teal-400 w-11/12 md:w-1/4 rounded-lg p-4 relative">
+                  <button id="closeModal" class="absolute top-3 right-2 text-gray-400 hover:text-gray-800">
+                     <i class="fas fa-times text-lg"></i>
+                  </button>
+            
+                  <div class="mt-5 grid grid-cols-1 gap-4">
+                     <div>
+                        <label class="block font-bold mb-2">Title</label>
+                        <input type="text" class="w-full border rounded p-2 bg-teal-200 text-white-400" placeholder="Enter task title">
+                     </div>
+                     <div>
+                        <label class="block font-bold mb-2">Description</label>
+                        <textarea class="w-full border rounded p-2 bg-teal-200" rows="2" placeholder="Enter task description"></textarea>
+                     </div>
+                     <div>
+                        <label class="block font-bold mb-2">Creation Date</label>
+                        <input type="date" class="w-full border rounded p-2 bg-teal-200" value="" id="creationDate" readonly>
+                     </div>
+                     <div>
+                        <label class="block font-bold mb-2">Due Date</label>
+                        <input type="date" class="w-full border rounded p-1 bg-teal-200" id="dueDate">
+                     </div>
+                     <div>
+                        <label class="block font-bold mb-2">Task Color</label>
+                        <input type="color" class="w-full h-10 rounded p-2 border bg-teal-200" id="colorPicker">
+                     </div>
+                     <div class="grid grid-cols-2 gap-2">
+                        <div>
+                           <label class="block font-bold mb-2">Start Time</label>
+                           <input type="time" class="w-full border rounded p-2 bg-teal-200">
+                        </div>
+                        <div>
+                           <label class="block font-bold mb-2">End Time</label>
+                           <input type="time" class="w-full border rounded p-2 bg-teal-200">
+                        </div>
+                     </div>
+                     <div class="flex justify-center">
+                        <button class="bg-teal-500 text-white px-4 py-2 rounded hover:bg-teal-600">Create</button>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </form>
+
+         <div id="editModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+            <div class="bg-white p-6 rounded shadow-lg">
+                <h2 class="text-xl font-bold mb-4">Edit Task</h2>
+                <form id="editForm">
+                    <label class="block mb-2">
+                        Title:
+                        <input id="editTitle" type="text" class="border border-gray-300 rounded w-full p-2">
+                    </label>
+                    <label class="block mb-2">
+                        Description:
+                        <textarea id="editDescription" class="border border-gray-300 rounded w-full p-2"></textarea>
+                    </label>
+                    <label class="block mb-4">
+                        Status:
+                        <select id="editStatus" class="border border-gray-300 rounded w-full p-2">
+                            <option value="In Progress">In Progress</option>
+                            <option value="Done">Done</option>
+                        </select>
+                    </label>
+                    <div class="flex justify-end space-x-4">
+                        <button type="button" id="closeEditModal" class="bg-gray-500 text-white px-4 py-2 rounded">Cancel</button>
+                        <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+            
+      </main>
+      <!-- tasks dummy i will delete it later-->
+      <div class="grid grid-row gap-4 p-4">
+      <h3 class="text-lg font-bold text-gray-700">Recent Tasks</h3>
+      <ul class="bg-teal-300 rounded-lg p-4 space-y-2">
+      <li class="bg-teal-400 rounded px-4 py-2">ADBMS - Activity 1</li>
+      <li class="bg-teal-400 rounded px-4 py-2">ADBMS - Activity 2</li>
+      <li class="bg-teal-400 rounded px-4 py-2">ADBMS - Activity 3</li>
+      <li class="bg-teal-400 rounded px-4 py-2">ADBMS - Activity 4</li>
+      <li class="bg-teal-400 rounded px-4 py-2">ADBMS - Activity 1</li>
+      <li class="bg-teal-400 rounded px-4 py-2">ADBMS - Activity 2</li>
+      <li class="bg-teal-400 rounded px-4 py-2">ADBMS - Activity 3</li>
+      <li class="bg-teal-400 rounded px-4 py-2">ADBMS - Activity 4</li>
+      </ul>
+      </div>
+      </div>
+      <!-- shty scripts -->
+   <script src="../js/date.js"></script>
+   <script src="../js/sidebar.js"></script>
+   <script src="../js/notif.js"></script>
+   <script src="../js/edit_Task.js"></script>
+   <script src="../js/createTaskModal.js"></script>
+   <script src="../js/loadTaskCreate.js"></script>
+   
+   </body>
+</html>
