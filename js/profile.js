@@ -17,7 +17,6 @@ document.addEventListener("click", (event) => {
 });
 
 // Profile Modal Elements
-// Profile Modal Elements
 const profileModal = document.getElementById("profile-modal");
 const closeModal = document.getElementById("close-modal");
 const openProfileModal = document.getElementById("open-profile-modal");
@@ -33,21 +32,21 @@ openProfileModal.addEventListener("click", (event) => {
       if (data.error) {
         alert(data.error);
       } else {
-        // Populate modal with user data, fallback to "Not set" for missing fields
-        const defaultValue = "Not set";
-
-        document.getElementById("username").innerText = data.name || defaultValue;
-        document.getElementById("userstatus").innerText = data.status || defaultValue;
-        document.getElementById("userschool").innerText = data.school || defaultValue;
-        document.getElementById("usercourse").innerText = data.course || defaultValue;
-
-        document.getElementById("useremail").innerText = data.email || defaultValue;
-        document.getElementById("usercontact").innerText = data.contact || defaultValue;
-        document.getElementById("useraddress").innerText = data.address || defaultValue;
-
-        // Optionally set the profile picture if available in backend data
-        const profilePic = document.getElementById("userpic");
-        profilePic.src = data.profilePicture || "https://i.pravatar.cc/300";
+        // Populate modal with user data, using field-specific placeholders for missing data
+        document.getElementById("username").innerText =
+          data.username || "Set name";
+        document.getElementById("userstatus").innerText =
+          data.userstatus || "Set status";
+        document.getElementById("userschool").innerText =
+          data.school || "Set school";
+        document.getElementById("usercourse").innerText =
+          data.usercourse || "Set course";
+        document.getElementById("useremail").innerText =
+          data.email || "Set email";
+        document.getElementById("usercontact").innerText =
+          data.usercontact || "Set contact";
+        document.getElementById("useraddress").innerText =
+          data.useraddress || "Set address";
 
         // Show the modal
         profileModal.classList.remove("hidden");

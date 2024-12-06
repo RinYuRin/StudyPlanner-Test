@@ -26,8 +26,8 @@ try {
             'taskId' => $task['taskId'],
             'title' => $task['title'],
             'description' => $task['description'],
-            'creationDate' => $task['creationDate'], // e.g., "2024-12-04"
-            'dueDate' => $task['dueDate'],           // e.g., "2024-12-07"
+            'creationDate' => $task['creationDate'],
+            'dueDate' => $task['dueDate'],           
             'taskColor' => $task['taskColor'],
         ];
     }

@@ -74,13 +74,13 @@
                <div id="course-buttons" class="flex space-x-4">
                  <!-- this is where the created button to appear -->
                </div>
-               <div class="flex items-center space-x-5">
-                  <button id="course-add" class="bg-teal-500 text-white px-4 py-2 rounded-md"><i class="fas fa-plus"></i></button>
-                  <i class="fas fa-edit"></i>
-                  <i class="fas fa-trash"></i>
+               <div class="flex items-center space-x-5 cursor-pointer">
+                  <button id="course-add" class="bg-teal-500 hover:bg-teal-800 text-white px-4 py-2 rounded-md transition-all duration-300"><i class="fas fa-plus"></i></button>
+                  <i class="fas fa-edit text-black-400 hover:text-red-800 transition-all duration-300"></i>
+                  <i class="fas fa-redo text-black-400 hover:text-red-800 transition-all duration-300"></i>
+                  <i class="fas fa-trash text-black-400 hover:text-red-800 transition-all duration-300"></i>
                   <button class="hover:bg-teal-300 px-2 py-1 rounded">Add Notes <i class="fas fa-plus"></i></button>
-                  <i class="fas fa-redo"></i>
-                  <i class="fas fa-check-square"></i>
+                  
                   
                </div>
             </div>
@@ -91,7 +91,6 @@
       </div>
 
       <!-- Modal for Adding a Course -->
-<!-- Updated Modal for Adding a Course -->
 <div id="course-modal" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center hidden">
    <div class="bg-teal-100 rounded-lg p-6 w-96 shadow-md relative">
       <button id="modal-close" class="absolute top-2 right-2 text-gray-700">
@@ -145,7 +144,7 @@
          <!-- Buttons -->
          <div class="flex justify-end">
             <button type="button" id="notes-cancel-button" class="bg-gray-400 text-white px-4 py-2 rounded mr-2">Cancel</button>
-            <button type="submit" class="bg-teal-500 text-white px-4 py-2 rounded">Save</button>
+            <button type="submit" class="bg-teal-500 text-white px-4 py-2 rounded">Add</button>
          </div>
       </form>
    </div>

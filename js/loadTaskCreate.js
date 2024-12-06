@@ -49,7 +49,8 @@ async function fetchTasks() {
             taskRow.innerHTML = `
                 <td class="p-2">
                     <span class="task-title cursor-pointer font-medium text-gray-700 flex items-center space-x-2" data-task-id="${task.taskId}">
-                        <input type="checkbox" class="mr-2"><i class="fas fa-star text-yellow-500"></i>
+                        <input type="checkbox" class="mr-2">
+                        <i class="fas fa-star ${task.starred === 'yes' ? 'text-yellow-500' : ''}"></i>
                         <span>${task.title}</span>
                     </span>
                 </td>
@@ -87,6 +88,32 @@ async function fetchTasks() {
             }
         });
 
+        // Attach event listeners to star icons
+        document.querySelectorAll('.fa-star').forEach(starIcon => {
+            starIcon.addEventListener('click', async (e) => {
+                const taskId = e.target.closest('.task-title').getAttribute('data-task-id');
+                const isStarred = e.target.classList.toggle('text-yellow-500');
+                try {
+                    const response = await fetch('../php/update_starred.php', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            taskId: taskId,
+                            starred: isStarred ? 'yes' : 'no'
+                        })
+                    });
+                    const result = await response.json();
+                    if (!response.ok) {
+                        throw new Error(result.error || 'Failed to update star status');
+                    }
+                } catch (error) {
+                    console.error('Error updating star status:', error);
+                    // Revert the toggle on error
+                    e.target.classList.toggle('text-yellow-500', !isStarred);
+                }
+            });
+        });
+
         // Attach event listeners to trash icons
         document.querySelectorAll('.fa-trash').forEach(icon => {
             icon.addEventListener('click', async (e) => {
@@ -106,6 +133,7 @@ async function fetchTasks() {
         syncButton.innerHTML = originalIcon;
     }
 }
+
 
 
 async function deleteTask(taskId) {
